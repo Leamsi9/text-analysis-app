@@ -1,0 +1,89 @@
+input::-webkit-input-placeholder {
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    line-height: 1.1;
+
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    line-height: 1.1;
+
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    line-height: 1.1;
+
+}
+
+input:-ms-input-placeholder {
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    line-height: 1.1;
+
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+textarea {
+    color: #F9B03D;
+
+}
+
+textarea::-webkit-input-placeholder {
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    line-height: 1.1;
+    opacity: .6;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    font-size: 1.3em;
+    line-height: 1.1;
+    opacity: .6;
+}
+
+textarea::-moz-placeholder { /* Firefox 19+ */
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    font-size: 1.3em;
+    line-height: 1.1;
+    opacity: .6;
+}
+
+textarea:-ms-input-placeholder {
+    color: #F9B03D !important;
+    text-align: center;
+    font-weight: 100;
+    font-size: 1.3em;
+    line-height: 1.1;
+    opacity: .6;
+}
+

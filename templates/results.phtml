@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Talkative Text Analyser</title>
+    <link rel="stylesheet" href="css/libs/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+</head>
+<body style="font-family:'Lato'; font-weight: 500;
+    line-height: 1.1;">
+
+<div class="container row text-center" style="margin: 0; padding: 0; width: 100%;">
+    <div class="navbar" style="background: #000000"><img src="images/talkative-logo-co-browsing.png" style="width: 300px"></div>
+    <div class="container col-xs-8 col-xs-offset-2">
+        <h1> Your Results</h1>
+        <h2><?php
+            print_r($_POST['target_text']); ?></h2>
+
+    <a href="/text-analyser"  name="save_text_button"  class="btn row"
+       style="background: #F9B03D; color: #ffffff">Return to text analyser</a>
+    </div>
+</div>
+</body>
+</html>
