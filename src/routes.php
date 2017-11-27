@@ -16,30 +16,53 @@ $app->get('/[{name}]', function (Request $request, Response $response, array $ar
 $app->post('/text-analyser', function (Request $request, Response $response, array $args) {
     return $this->renderer->render($response, 'index.phtml', $args);
 });
-$app->post('/results', function ($request, $response, $args) {
-    $targetText = new \App\TargetText;;
-    $targetText->targetFile();
+$app->post('/string-analysis', function ($request, $response, $args) {
+    $targetText = new \App\TargetText;
+    $targetText->getTargetString();
     $targetText->string;
-    $text = $targetText->text;
-    $wordArray = new \App\WordFinder;
-    $wordList = $wordArray->wordArray($text);
-    $wordCount = new \App\WordCounter();
-    $words = $wordCount->wordCount($wordList);
-    $sentenceCount = new \App\SentenceCounter();
-    $sentenceCount->sentenceMatch($text);
-    $lengths = new \App\WordLengthCalculator();
-    $chars = $lengths->textLength($text);
-    $lengths->avgWordLength($chars, $words);
-//    $lengths->wordLengths($wordList);
-    $lengths->longestWord($wordList);
-
+    $text = $targetText->string;
+    $wordFinder = new \App\WordFinder;
+    $wordList = $wordFinder->getWordArray($text);
+    $wordCounter = new \App\WordCounter();
+    $wordCount = $wordCounter->getWordCount($wordList);
+//    $sentenceCount = new \App\SentenceCounter();
+//    $sentenceCount->sentenceMatch($text);
+    $lengthCalculator = new \App\WordLengthCalculator();
+    $chars = $lengthCalculator->getTextLength($wordList);
+    $avgWordLength = $lengthCalculator->getAvgWordLength($chars, $wordCount);
+    $longestWord = $lengthCalculator->getLongestWord($wordList);
+    $wordLengths = $lengthCalculator->getLengthsArray($wordList);
+    $lengthsSorter = new \App\LengthSorter();
+    $wordLengthFrequency = $lengthsSorter->getWordLengthFrequency($wordLengths);
+    $biggestWordLength = $lengthsSorter->getBiggestWordLength($wordLengths);
+    $lengthFrequencyList = $lengthsSorter->listLengthFrequencies($wordLengthFrequency);
+    $mostCommonLengthFrequency = $lengthsSorter->getMostCommonLengthFrequency($wordLengthFrequency);
 
 
     return $this->renderer->render($response, 'results.phtml', $args);
 });
 
-$app->post('/results2', function ($request, $response, $args) {
-
+$app->post('/file-analysis', function ($request, $response, $args) {
+    $targetText = new \App\TargetText;
+    $targetText->getTargetString();
+    $targetText->file;
+    $text = $targetText->file;
+    $wordFinder = new \App\WordFinder;
+    $wordList = $wordFinder->getWordArray($text);
+    $wordCounter = new \App\WordCounter();
+    $wordCount = $wordCounter->getWordCount($wordList);
+//    $sentenceCount = new \App\SentenceCounter();
+//    $sentenceCount->sentenceMatch($text);
+    $lengthCalculator = new \App\WordLengthCalculator();
+    $chars = $lengthCalculator->getTextLength($wordList);
+    $avgWordLength = $lengthCalculator->getAvgWordLength($chars, $wordCount);
+    $longestWord = $lengthCalculator->getLongestWord($wordList);
+    $wordLengths = $lengthCalculator->getLengthsArray($wordList);
+    $lengthsSorter = new \App\LengthSorter();
+    $wordLengthFrequency = $lengthsSorter->getWordLengthFrequency($wordLengths);
+    $biggestWordLength = $lengthsSorter->getBiggestWordLength($wordLengths);
+    $lengthFrequencyList = $lengthsSorter->listLengthFrequencies($wordLengthFrequency);
+    $mostCommonLengthFrequency = $lengthsSorter->getMostCommonLengthFrequency($wordLengthFrequency);
 
 
 

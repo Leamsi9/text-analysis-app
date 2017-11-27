@@ -17,22 +17,22 @@
         <h1> Talkative Text Analyser Challenge</h1>
         <h3>Type a text string for analysis</h3>
         <div class="container col-xs-6 col-xs-offset-3">
-            <form class="form-group text-center" action="results2" method="post">
+            <form class="form-group text-center" action="string-analysis" method="post">
                 <label>
-                    <textarea name="target_text" class="btn form-control"
+                    <textarea name="string" class="btn form-control"
                               style="border-color: #F9B03D; width: 200px; height: 100px"
                               placeholder="Type or paste your string here"></textarea>
                 </label>
                 <br><br>
-                <input type="submit" name="string" value="Analyse string" class="btn" style="background: #F9B03D; color: #ffffff"/>
+                <input type="submit" value="Analyse string" class="btn" style="background: #F9B03D; color: #ffffff"/>
             </form>
         </div>
     </div>
     <div class="container col-xs-4 col-xs-offset-4">
-        <form action="results" method="post">
+        <form action="file-analysis" method="post">
             <h3>Choose a text file for analysis </h3>
             <br>
-            <input class="form-control form-control-xs name"
+            <input class="form-control form-control-xs"
                    style="background: #ffffff; color: #000; border-color: #F9B03D" type="text"
                    placeholder="Type a url for your favourite .txt file" name="user_url">
             <br><input name="file" type="submit" value="Analyse .txt file" class="btn row"

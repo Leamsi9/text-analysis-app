@@ -9,10 +9,10 @@ class TargetText
 {
     public $string;
 
-    public function targetString()
+    public function getTargetString()
     {
         if (isset($_POST['string'])) {
-            $this->string = $_POST['target_text'];
+            $this->string = $_POST['string'];
         }
         return $this->string;
     }
@@ -20,21 +20,21 @@ class TargetText
 
     public function __construct()
     {
-        $this->targetFile();
+        $this->getTargetFile();
     }
 
     public $url = '';
-    public $text;
+    public $file;
 
-    public function targetFile()
+    public function getTargetFile()
     {
         if (isset($_POST ['file'])) {
             $this->url = $_POST['user_url'];
 //        var_dump($this->url);
-            $this->text = file_get_contents($this->url);
+            $this->file = file_get_contents($this->url);
 //        var_dump($this->file);
         }
-        return $this->text;
+        return $this->file;
     }
 }
 
@@ -42,10 +42,10 @@ class WordFinder
 {
     private $wordArray;
 
-    public function wordArray($text)
+    public function getWordArray($text)
     {
         $this->wordArray = preg_split("/[\s.,;:'\"\(\)\+-]+/", $text);
-//        var_dump($this->wordArray); /\
+//        var_dump($this->wordArray);
         return $this->wordArray;
     }
 }
@@ -54,56 +54,51 @@ class WordCounter
 {
     private $wordCount;
 
-    public function wordCount(array $wordArray)
+    public function getWordCount(array $wordArray)
     {
         $this->wordCount = count($wordArray);
-        print_r('word count: ' . $this->wordCount . PHP_EOL);
+        print_r('word count: ' . $this->wordCount . '<br>');
         return $this->wordCount;
     }
 }
 
-class SentenceCounter
-{
-    private $sentenceCount;
-
-    public function sentenceMatch($string)
-    {
-        $this->sentenceCount = preg_match_all('/[^\s](\.|\!|\?)(?!\w)/', $string);
-//        print_r($this->sentenceCount);
-        return $this->sentenceCount;
-    }
-}
+//class SentenceCounter
+//{
+//    private $sentenceCount;
+//
+//    public function sentenceMatch($string)
+//    {
+//        $this->sentenceCount = preg_match_all('/[^\s](\.|\!|\?)(?!\w)/', $string);
+////        print_r($this->sentenceCount);
+//        return $this->sentenceCount;
+//    }
+//}
 
 class WordLengthCalculator
 {
-//$wordLength = wordLengths($targetTextWords);
-    /**
-     * @param $wordArray
-     * @return int (character length of each word)
-     */
-
     private $charCount;
 
-    public function textLength($text)
+    public function getTextLength($wordArray)
     {
-        $this->charCount = strlen($text);
-//        print_r($this->charCount . PHP_EOL);
+        $stringChars = implode("", $wordArray);
+        $this->charCount = strlen($stringChars);
+        print_r('chars:    ' . $this->charCount . '<br>');
         return $this->charCount;
     }
 
     private $avgWordLength;
 
-    public function avgWordLength($charCount, $wordCount)
+    public function getAvgWordLength($charCount, $wordCount)
     {
         $this->avgWordLength = round($charCount / $wordCount, 3);
-        print_r('avg word length: ' . $this->avgWordLength . PHP_EOL);
+        print_r('avg word length: ' . $this->avgWordLength . '<br>');
         return $this->avgWordLength;
     }
 
     private $longestWordLength = 0;
     private $longestWord = '';
 
-    public function longestWord($wordArray)
+    public function getLongestWord($wordArray)
     {
         foreach ($wordArray as $word) {
             if (strlen($word) > $this->longestWordLength) {
@@ -111,17 +106,64 @@ class WordLengthCalculator
                 $this->longestWord = $word;
             }
         }
-        print_r('longest word: ' . $this->longestWord . PHP_EOL);
+        print_r('longest word: ' . $this->longestWord . '<br>');
         return $this->longestWord;
+    }
+
+    private $wordLengthsArray;
+
+    public function getLengthsArray($wordArray)
+    {
+        $this->wordLengthsArray = array_map('strlen', $wordArray);
+//        echo'wordLengthsArray: '; var_dump($this->wordLengthsArray); echo '<br>';
+        return $this->wordLengthsArray;
     }
 }
 
-//private $length = 0;
-//public function wordLengths($wordArray)
-//{
-//    foreach ($wordArray as $word) {
-//        $this->length = strlen($word);
-//    }
-//    var_dump($this->length);
-//    return $this->length;
-//}
+class LengthSorter
+{
+//missing: lengths section, autoloader fixing, css transporting, containers, interfaces, type hinting, removing redundant directories, readme, unit tests, browserstack.
+
+
+    private $wordLengthFrequency;
+
+    public function getWordLengthFrequency($wordLengthsArray)
+    {
+        $this->wordLengthFrequency = array_count_values($wordLengthsArray);
+        ksort($this->wordLengthFrequency);
+//        echo 'wordLengthFrequency '; var_dump($this->wordLengthFrequency); '<br>';
+        return $this->wordLengthFrequency;
+    }
+
+    private $biggestWordLength;
+
+    public function getBiggestWordLength($wordLengthFrequency)
+    {
+        $this->biggestWordLength = max($wordLengthFrequency);
+        print_r('<br> biggestWordLength:' . $this->biggestWordLength . '<br>');
+        return $this->biggestWordLength;
+    }
+
+    private $lengthFrequencyList;
+
+    public function listLengthFrequencies($wordLengthFrequency)
+    {
+        $highestFrequencies = array_keys($wordLengthFrequency, max($wordLengthFrequency));
+        $this->lengthFrequencyList = implode(' & ', $highestFrequencies);
+        print_r('frequencyList' . $this->lengthFrequencyList);
+        return $this->lengthFrequencyList;
+
+    }
+//$lengthFrequencyList = array_keys($lengthFrequency, max($lengthFrequency));
+
+    private $mostCommonLengthFrequency;
+
+    public function getMostCommonLengthFrequency($wordLengthFrequency)
+    {
+        $this->mostCommonLengthFrequency = max($wordLengthFrequency);
+        print_r('<br> most common Length frequency: ' . $this->mostCommonLengthFrequency . '<br>');
+        return $this->mostCommonLengthFrequency;
+    }
+}
+
+
