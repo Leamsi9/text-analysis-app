@@ -28,7 +28,7 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-require __DIR__ . '/../src/App/TargetText.php';
+require __DIR__ . '/../src/App/TargetAnalyseText.php';
 
 // Run app
 $app->run();

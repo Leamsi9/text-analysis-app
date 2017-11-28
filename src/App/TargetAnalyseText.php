@@ -5,37 +5,36 @@ namespace App;
 use phpDocumentor\Reflection\Types\Integer;
 use phpDocumentor\Reflection\Types\String_;
 
-class TargetText
+class TargetString
 {
     public $string;
 
     public function getTargetString()
     {
-        if (isset($_POST['string'])) {
-            $this->string = $_POST['string'];
-        }
+        $this->string = $_POST['string'];
         return $this->string;
     }
+}
 
-
+class TargetFile
+{
     public function __construct()
     {
         $this->getTargetFile();
     }
 
-    public $url = '';
     public $file;
+    public $url = '';
 
     public function getTargetFile()
     {
-        if (isset($_POST ['file'])) {
-            $this->url = $_POST['user_url'];
+        $this->url = $_POST['user_url'];
 //        var_dump($this->url);
-            $this->file = file_get_contents($this->url);
+        $this->file = file_get_contents($this->url);
 //        var_dump($this->file);
-        }
         return $this->file;
     }
+
 }
 
 class WordFinder
@@ -57,7 +56,7 @@ class WordCounter
     public function getWordCount(array $wordArray)
     {
         $this->wordCount = count($wordArray);
-        print_r('word count: ' . $this->wordCount . '<br>');
+//        print_r('word count: ' . $this->wordCount . '<br>');
         return $this->wordCount;
     }
 }
@@ -82,7 +81,7 @@ class WordLengthCalculator
     {
         $stringChars = implode("", $wordArray);
         $this->charCount = strlen($stringChars);
-        print_r('chars:    ' . $this->charCount . '<br>');
+//        print_r('chars:    ' . $this->charCount . '<br>');
         return $this->charCount;
     }
 
@@ -91,7 +90,7 @@ class WordLengthCalculator
     public function getAvgWordLength($charCount, $wordCount)
     {
         $this->avgWordLength = round($charCount / $wordCount, 3);
-        print_r('avg word length: ' . $this->avgWordLength . '<br>');
+//        print_r('avg word length: ' . $this->avgWordLength . '<br>');
         return $this->avgWordLength;
     }
 
@@ -106,7 +105,7 @@ class WordLengthCalculator
                 $this->longestWord = $word;
             }
         }
-        print_r('longest word: ' . $this->longestWord . '<br>');
+//        print_r('longest word: ' . $this->longestWord . '<br>');
         return $this->longestWord;
     }
 
@@ -140,7 +139,7 @@ class LengthSorter
     public function getBiggestWordLength($wordLengthFrequency)
     {
         $this->biggestWordLength = max($wordLengthFrequency);
-        print_r('<br> biggestWordLength:' . $this->biggestWordLength . '<br>');
+//        print_r('<br> biggestWordLength:' . $this->biggestWordLength . '<br>');
         return $this->biggestWordLength;
     }
 
@@ -150,10 +149,11 @@ class LengthSorter
     {
         $highestFrequencies = array_keys($wordLengthFrequency, max($wordLengthFrequency));
         $this->lengthFrequencyList = implode(' & ', $highestFrequencies);
-        print_r('frequencyList' . $this->lengthFrequencyList);
+//        print_r('frequencyList' . $this->lengthFrequencyList);
         return $this->lengthFrequencyList;
 
     }
+
 //$lengthFrequencyList = array_keys($lengthFrequency, max($lengthFrequency));
 
     private $mostCommonLengthFrequency;
@@ -161,9 +161,61 @@ class LengthSorter
     public function getMostCommonLengthFrequency($wordLengthFrequency)
     {
         $this->mostCommonLengthFrequency = max($wordLengthFrequency);
-        print_r('<br> most common Length frequency: ' . $this->mostCommonLengthFrequency . '<br>');
+        var_dump($this->mostCommonLengthFrequency);
         return $this->mostCommonLengthFrequency;
     }
 }
 
+class TextEntity
+{
+    public $text;
 
+    public function __construct()
+    {
+        if (isset($_POST ['string'])) {
+            $targetString = new TargetString();
+            $targetString->getTargetString();
+            $this->text = $targetString->string;
+        } elseif (isset($_POST['file'])) {
+            $targetFile = new TargetFile();
+            $targetFile->getTargetFile();
+            $this->text = $targetFile->file;
+        }
+    }
+
+}
+
+class AnalyseTextAction
+{
+    public function analyseText($text)
+    {
+        $wordFinder = new \App\WordFinder;
+        $wordList = $wordFinder->getWordArray($text);
+        $wordCounter = new \App\WordCounter();
+        $this->wordCount = $wordCounter->getWordCount($wordList);
+        $lengthCalculator = new \App\WordLengthCalculator();
+        $this->charCount = $lengthCalculator->getTextLength($wordList);
+        $this->avgWordLength = $lengthCalculator->getAvgWordLength($this->charCount, $this->wordCount);
+        $this->longestWord = $lengthCalculator->getLongestWord($wordList);
+        $wordLengths = $lengthCalculator->getLengthsArray($wordList);
+        $lengthsSorter = new \App\LengthSorter();
+        $this->wordLengthFrequency = $lengthsSorter->getWordLengthFrequency($wordLengths);
+        $this->maxWordLength = $lengthsSorter->getBiggestWordLength($wordLengths);
+        $this->mostCommonLengthFrequency = $lengthsSorter->getMostCommonLengthFrequency($this->wordLengthFrequency);
+        $this->lengthFrequencyList = $lengthsSorter->listLengthFrequencies($this->wordLengthFrequency);
+    }
+}
+
+class OutputAnalysisAction
+{
+    public function outputData($wordCount, $avgWordLength, $wordLengthFrequency, $mostCommonLengthFrequency, $lengthFrequencyList)
+    {
+        echo 'Word count is ' . $wordCount . '<br> Average  word  length  is ' . $avgWordLength . '<br>';
+        foreach ($wordLengthFrequency as $length => $frequency) {
+            echo "Number  of  words  of  length $length is $frequency <br>";
+        }
+
+        echo 'The  most  frequently  occurring  word  length  is ' . $mostCommonLengthFrequency . ',  for  word  lengths  of ' . $lengthFrequencyList;
+    }
+
+}

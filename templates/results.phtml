@@ -1,3 +1,6 @@
+<?php
+use App\AnalyseTextAction;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,13 @@
     <div class="container col-xs-8 col-xs-offset-2">
         <h1> Your Results</h1>
         <h2><?php
-            print_r($_POST['string']); ?></h2>
+            $string = new \App\TextEntity();
+            $textAnalyser = new \App\AnalyseTextAction();
+            $textAnalyser->analyseText($string->text);
+            $view = new \App\OutputAnalysisAction();
+            $view->outputData($textAnalyser->wordCount, $textAnalyser->avgWordLength, $textAnalyser->wordLengthFrequency, $textAnalyser->mostCommonWordLengthFrequency, $textAnalyser->lengthFrequencyList);
+
+            ?></h2>
 
     <a href="/text-analyser"  name="save_text_button"  class="btn row"
        style="background: #F9B03D; color: #ffffff">Return to text analyser</a>
@@ -24,3 +33,5 @@
 </div>
 </body>
 </html>
+
+<!--($wordCount, $avgWordLength, $wordLengthFrequency, $mostCommonLengthFrequency, $lengthFrequencyList)-->
