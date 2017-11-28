@@ -1,6 +1,6 @@
 <?php
 
-use App\AnalyseTextAction;
+use App\TextActionsContainer;
 
 ?>
 <!DOCTYPE html>
@@ -21,8 +21,8 @@ use App\AnalyseTextAction;
         <h1><b> Here are your results.</h1>
         <h4>
             <?php
-            $string = new \App\TextEntity();
-            $textAnalyser = new \App\AnalyseTextAction();
+            $string = new \App\TextContainer();
+            $textAnalyser = new \App\TextActionsContainer();
             $textAnalysis = $textAnalyser->analyseText($string->text);
             $wordCount = $textAnalyser->wordCount;
             $chars = $textAnalyser->charCount;

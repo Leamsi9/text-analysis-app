@@ -24,7 +24,7 @@ body {
 }
 
 input::-webkit-input-placeholder {
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     line-height: 1.1;
@@ -32,7 +32,7 @@ input::-webkit-input-placeholder {
 }
 
 input:-moz-placeholder { /* Firefox 18- */
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     line-height: 1.1;
@@ -40,7 +40,7 @@ input:-moz-placeholder { /* Firefox 18- */
 }
 
 input::-moz-placeholder { /* Firefox 19+ */
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     line-height: 1.1;
@@ -48,7 +48,7 @@ input::-moz-placeholder { /* Firefox 19+ */
 }
 
 input:-ms-input-placeholder {
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     line-height: 1.1;
@@ -56,18 +56,18 @@ input:-ms-input-placeholder {
 }
 
 textarea:hover,
-input:hover,
+input.btn.submit:hover,
 textarea:active,
-input:active,
+input.btn.submit:active,
 textarea:focus,
-input:focus,
+input.btn.submit:focus,
 button:focus,
 button:active,
 button:hover,
 label:focus,
 .btn:active,
 .btn.active {
-    outline: 0px !important;
+    outline: 0px;
     -webkit-appearance: none;
 }
 
@@ -86,7 +86,7 @@ label:focus,
 }
 
 textarea::-webkit-input-placeholder {
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     line-height: 1.1;
@@ -94,7 +94,7 @@ textarea::-webkit-input-placeholder {
 }
 
 textarea:-moz-placeholder { /* Firefox 18- */
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     font-size: 1.3em;
@@ -103,7 +103,7 @@ textarea:-moz-placeholder { /* Firefox 18- */
 }
 
 textarea::-moz-placeholder { /* Firefox 19+ */
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     font-size: 1.3em;
@@ -112,7 +112,7 @@ textarea::-moz-placeholder { /* Firefox 19+ */
 }
 
 textarea:-ms-input-placeholder {
-    color: #F9B03D !important;
+    color: #F9B03D;
     text-align: center;
     font-weight: 100;
     font-size: 1.3em;

@@ -3,7 +3,7 @@
 namespace App;
 
 
-class AnalyseTextAction
+class TextActionsContainer
 {
     public function analyseText($text)
     {

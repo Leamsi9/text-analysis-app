@@ -3,7 +3,7 @@
 namespace App;
 
 
-class TextEntity
+class TextContainer
 {
     public $text;
 
