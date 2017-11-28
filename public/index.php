@@ -28,11 +28,7 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-require __DIR__ . '/../src/App/TargetAnalyseText.php';
-
 // Run app
 $app->run();
 //
-//$targetText = new \App\TargetText();
-//$string = $_POST['text_edit'];
-//
+

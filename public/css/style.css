@@ -1,3 +1,28 @@
+body {
+    font-family: 'Lato';
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.navbar {
+    background: #000000;
+}
+
+.navbar img {
+    width: 300px;
+}
+
+.submit {
+    background: #F9B03D;
+    color: #ffffff;
+}
+
 input::-webkit-input-placeholder {
     color: #F9B03D !important;
     text-align: center;
@@ -41,15 +66,22 @@ button:active,
 button:hover,
 label:focus,
 .btn:active,
-.btn.active
-{
-    outline:0px !important;
-    -webkit-appearance:none;
+.btn.active {
+    outline: 0px !important;
+    -webkit-appearance: none;
 }
 
-textarea {
+.target_string {
     color: #F9B03D;
+    border-color: #F9B03D;
+    width: 200px;
+    height: 100px;
+}
 
+.target_file {
+    background: #ffffff;
+    color: #000;
+    border-color: #F9B03D;
 }
 
 textarea::-webkit-input-placeholder {

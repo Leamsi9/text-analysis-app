@@ -1,5 +1,7 @@
 <?php
+
 use App\AnalyseTextAction;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,11 +13,10 @@ use App\AnalyseTextAction;
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
 
 </head>
-<body style="font-family:'Lato'; font-weight: 500;
-    line-height: 1.1;">
+<body>
 
-<div class="container row text-center" style="margin: 0; padding: 0; width: 100%;">
-    <div class="navbar" style="background: #000000"><img src="images/talkative-logo-co-browsing.png" style="width: 300px"></div>
+<div class="container row text-center wrapper">
+    <div class="navbar" style="background: #000000"><img src="images/talkative-logo-co-browsing.png"></div>
     <div class="container col-xs-8 col-xs-offset-2">
         <h1> Your Results</h1>
         <h2><?php
@@ -23,15 +24,15 @@ use App\AnalyseTextAction;
             $textAnalyser = new \App\AnalyseTextAction();
             $textAnalyser->analyseText($string->text);
             $view = new \App\OutputAnalysisAction();
-            $view->outputData($textAnalyser->wordCount, $textAnalyser->avgWordLength, $textAnalyser->wordLengthFrequency, $textAnalyser->mostCommonWordLengthFrequency, $textAnalyser->lengthFrequencyList);
+            $view->outputData($textAnalyser->wordCount, $textAnalyser->avgWordLength, $textAnalyser->wordLengthFrequency, $textAnalyser->mostCommonLengthFrequency, $textAnalyser->lengthFrequencyList);
 
-            ?></h2>
+            ?>
+        </h2>
 
-    <a href="/text-analyser"  name="save_text_button"  class="btn row"
-       style="background: #F9B03D; color: #ffffff">Return to text analyser</a>
+        <a href="/text-analyser" name="save_text_button" class="btn row submit">
+            Return to text analyser
+        </a>
     </div>
 </div>
 </body>
 </html>
-
-<!--($wordCount, $avgWordLength, $wordLengthFrequency, $mostCommonLengthFrequency, $lengthFrequencyList)-->
