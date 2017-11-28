@@ -21,21 +21,8 @@ use App\TextActionsContainer;
         <h1><b> Here are your results.</h1>
         <h4>
             <?php
-            $string = new \App\TextContainer();
-            $textAnalyser = new \App\TextActionsContainer();
-            $textAnalysis = $textAnalyser->analyseText($string->text);
-            $wordCount = $textAnalyser->wordCount;
-            $chars = $textAnalyser->charCount;
-            $longest = $textAnalyser->longestWord;
-            $maxLength = $textAnalyser->biggestWordLength;
-            $average = $textAnalyser->avgWordLength;
-            $mostCommonLengthFrequency = $textAnalyser->mostCommonLengthFrequency;
-            $wordLengthFrequency = $textAnalyser->wordLengthFrequency;
-            $list = $textAnalyser->lengthFrequencyList;
-
-
-            echo "<h3><p>You may be excited to know that your text has $wordCount words, amounting to $chars characters. Not many people know that.</p></h3>
-            <h4><p> <br>The longest word is $longest, which is $maxLength characters long.</p>
+            echo "<h3><p>You may be excited to know that your text has $wordCount words, amounting to $charCount characters. Not many people know that.</p></h3>
+            <h4><p> <br>The longest word is '$longestWord', which is $maxLength characters long.</p>
             <p> The average word length is $average characters.</p></h4>";
 
             foreach ($wordLengthFrequency as $length => $frequency) {
