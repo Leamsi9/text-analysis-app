@@ -18,7 +18,7 @@ class AnalyseTextAction
         $wordLengths = $lengthCalculator->getLengthsArray($wordList);
         $lengthsSorter = new \App\SortLengthsAction();
         $this->wordLengthFrequency = $lengthsSorter->getWordLengthFrequency($wordLengths);
-        $this->maxWordLength = $lengthsSorter->getBiggestWordLength($wordLengths);
+        $this->biggestWordLength = $lengthsSorter->getBiggestWordLength($wordLengths);
         $this->mostCommonLengthFrequency = $lengthsSorter->getMostCommonLengthFrequency($this->wordLengthFrequency);
         $this->lengthFrequencyList = $lengthsSorter->listLengthFrequencies($this->wordLengthFrequency);
     }

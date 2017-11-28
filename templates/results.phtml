@@ -14,21 +14,37 @@ use App\AnalyseTextAction;
 
 </head>
 <body>
-
 <div class="container row text-center wrapper">
     <div class="navbar" style="background: #000000"><img src="images/talkative-logo-co-browsing.png"></div>
     <div class="container col-xs-8 col-xs-offset-2">
-        <h1> Your Results</h1>
-        <h2><?php
+
+        <h1><b> Here are your results.</h1>
+        <h4>
+            <?php
             $string = new \App\TextEntity();
             $textAnalyser = new \App\AnalyseTextAction();
-            $textAnalyser->analyseText($string->text);
-            $view = new \App\OutputAnalysisAction();
-            $view->outputData($textAnalyser->wordCount, $textAnalyser->avgWordLength, $textAnalyser->wordLengthFrequency, $textAnalyser->mostCommonLengthFrequency, $textAnalyser->lengthFrequencyList);
+            $textAnalysis = $textAnalyser->analyseText($string->text);
+            $wordCount = $textAnalyser->wordCount;
+            $chars = $textAnalyser->charCount;
+            $longest = $textAnalyser->longestWord;
+            $maxLength = $textAnalyser->biggestWordLength;
+            $average = $textAnalyser->avgWordLength;
+            $mostCommonLengthFrequency = $textAnalyser->mostCommonLengthFrequency;
+            $wordLengthFrequency = $textAnalyser->wordLengthFrequency;
+            $list = $textAnalyser->lengthFrequencyList;
 
+
+            echo "<h3><p>You may be excited to know that your text has $wordCount words, amounting to $chars characters. Not many people know that.</p></h3>
+            <h4><p> <br>The longest word is $longest, which is $maxLength characters long.</p>
+            <p> The average word length is $average characters.</p></h4>";
+
+            foreach ($wordLengthFrequency as $length => $frequency) {
+                echo "<h4>Number  of  words  of  length $length is $frequency <br></h4>";
+            }
+            echo "<h4>The  most common occurrence for any given length  is $mostCommonLengthFrequency times,  for  word  lengths  of $list characters. </h4>";
             ?>
-        </h2>
-
+        </h4>
+        <br>
         <a href="/text-analyser" name="save_text_button" class="btn row submit">
             Return to text analyser
         </a>
